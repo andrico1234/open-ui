@@ -1,0 +1,8 @@
+:root {
+  --font-primary: "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid red;
+}
