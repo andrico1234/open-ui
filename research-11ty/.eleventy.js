@@ -1,5 +1,16 @@
+const fs = require("fs").promises;
+const typography = require("./src/typography.js");
+
+function generateBaseCss() {
+  const css = typography.toString();
+
+  fs.writeFile("./src/base.css", css);
+}
+
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("./src/styles.css");
+  generateBaseCss();
+
+  eleventyConfig.addPassthroughCopy("./src/base.css");
 
   return {
     dir: {

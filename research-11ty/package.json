@@ -11,7 +11,7 @@
   "author": "Andrico Karoulla",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.0"
+    "@11ty/eleventy": "^1.0.0",
+    "typography": "^0.16.21"
   }
 }
- 
