@@ -38,7 +38,7 @@ The results of such a migration will ensure that the Open UI site is:
 ### Proof of concept
 - [x] Install Eleventy
 - [ ] Settle on a template engine (Nunjucks, Lit?)
-- [ ] Prove migrating styles
+- [x] Prove migrating styles
 - [ ] Prove converting MDX to 11ty
 - [ ] Prove serviing images
 - [ ] Prove site navigation
