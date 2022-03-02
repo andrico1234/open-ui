@@ -11,10 +11,13 @@ module.exports = function (eleventyConfig) {
   generateBaseCss();
 
   eleventyConfig.addPassthroughCopy("./src/base.css");
+  eleventyConfig.addPassthroughCopy("./src/img");
 
   return {
     dir: {
       input: "src",
     },
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
   };
 };

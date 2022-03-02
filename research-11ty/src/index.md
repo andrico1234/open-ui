@@ -1,6 +1,6 @@
 ---
 title: Hello World
-layout: "base.njk"
+layout: "mainLayout.njk"
 ---
 
 Hello Open UI
