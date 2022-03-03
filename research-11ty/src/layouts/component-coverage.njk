@@ -1,4 +1,25 @@
-import {componentsByName} from '../sources'
+{% set %}
+
+{% macro linkToSource(component) %}
+  <a target="_blank" rel="noopener noreferrer" href="{{ component.url }}">
+    {{ component.sourceName }}
+  </a>
+{% endmacro %}
+
+<div>
+  <h2>Names</h2>
+  <ul>
+    {% for component in components %}
+      <li>
+        {{ component.name }} -
+        <small>
+          {{ linkToComponent(component) }}
+        </small>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{# import {componentsByName} from '../sources'
 
 const ComponentCoverage = ({component}) => {
   const matchingComponents = _.get(componentsByName, component)
@@ -9,7 +30,7 @@ const ComponentCoverage = ({component}) => {
   }
   return (
     <div>
-      <h2>Names</h2>
+      
       <ul style={
         {marginLeft: 0}
       }>
@@ -32,20 +53,7 @@ const ComponentCoverage = ({component}) => {
               }>
                 {
                 components.map((component, i, arr) => (
-                  <span key={
-                    component.name + component.sourceName
-                  }>
-                    <a target="_blank" rel="noopener noreferrer"
-                      href={
-                        component.url
-                    }>
-                      {
-                      component.sourceName
-                    } </a>
-                    {
-                    i < arr.length - 1 && ', '
-                  } </span>
-                ))
+                
               } </small>
             </li>
           )
@@ -54,4 +62,5 @@ const ComponentCoverage = ({component}) => {
     </div>
   )
 }
-export default ComponentCoverage
+export default ComponentCoverage #}
+{# macros allow us to define reusable blocks of content #}

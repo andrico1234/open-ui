@@ -1,6 +1,6 @@
-# Research 11ty
+# Research: Migrate static site away from Gatsby
 
-This is a proof-of-concept to understand the complexities with moving away from the Gatsby framework, to something much more simple, like 11ty.
+This is a proof-of-concept to understand the complexities with moving away from the Gatsby framework, to something more simple, like 11ty or SvelteKit.
 
 ## Why do we want to do migrate away from React/Gatsby?
 
