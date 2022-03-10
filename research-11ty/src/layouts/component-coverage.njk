@@ -1,4 +1,9 @@
-{% set %}
+---
+title: Component Coverage
+component: "Alert"
+---
+
+{# provide a constant, components that the rest of the page has access to #}
 
 {% macro linkToSource(component) %}
   <a target="_blank" rel="noopener noreferrer" href="{{ component.url }}">
@@ -6,19 +11,24 @@
   </a>
 {% endmacro %}
 
+
+
 <div>
   <h2>Names</h2>
   <ul>
-    {% for component in components %}
-      <li>
-        {{ component.name }} -
-        <small>
-          {{ linkToComponent(component) }}
-        </small>
-      </li>
+    {% for componentGroup in components %}
+      {% for group in componentGroup %}
+        <li>
+          {{ group.name }} -
+          <small>
+            {{ linkToSource(group) }}
+          </small>
+        </li>
+      {% endfor %}
     {% endfor %}
   </ul>
 </div>
+
 {# import {componentsByName} from '../sources'
 
 const ComponentCoverage = ({component}) => {

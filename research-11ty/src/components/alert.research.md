@@ -8,12 +8,12 @@ An alert is an element that displays a brief, important message in a way that at
 
 import ComponentCoverage from '../components/component-coverage'
 
-<ComponentCoverage component="Alert" />
+<!-- <ComponentCoverage component="Alert" /> -->
 
 import Concepts from '../components/concepts'
 
 ## Concepts
 
-<Concepts component="Alert" />
+<!-- <Concepts component="Alert" /> -->
 
 <!--  -->

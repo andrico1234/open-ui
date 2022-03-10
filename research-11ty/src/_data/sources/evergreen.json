@@ -277,7 +277,6 @@
         }
       ]
     },
-    // @todo: Also has a radio group element/component with a heading/label
     {
       "name": "Radio",
       "openUIName": "Radio Button",

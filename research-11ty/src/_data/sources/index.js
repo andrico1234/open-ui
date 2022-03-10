@@ -1,26 +1,26 @@
-import _ from 'lodash'
+const _ = require("lodash");
 
-import antd from './antd.json5'
-import atlassian from './atlassian.json5'
-import auth0 from './auth0.json5'
-import bootstrap from './bootstrap.json5'
-import carbon from './carbon.json5'
-import chromium from './chromium.json5'
-import evergreen from './evergreen.json5'
-import fabric from './fabric.json5'
-import fast from './fast.json5'
-import lightning from './lightning.json5'
-import lion from './lion.json5'
-import materialComponentsWeb from './materialComponentsWeb.json5'
-import primer from './primer.json5'
-import semantic from './semantic.json5'
-import spectrum from './spectrum.json5'
-import stardust from './stardust.json5'
-import w3 from './w3.json5'
-import web from './web.json5'
+const antd = require("./antd.json");
+const atlassian = require("./atlassian.json");
+const auth0 = require("./auth0.json");
+const bootstrap = require("./bootstrap.json");
+const carbon = require("./carbon.json");
+const chromium = require("./chromium.json");
+const evergreen = require("./evergreen.json");
+const fabric = require("./fabric.json");
+const fast = require("./fast.json");
+const lightning = require("./lightning.json");
+const lion = require("./lion.json");
+const materialComponentsWeb = require("./materialComponentsWeb.json");
+const primer = require("./primer.json");
+const semantic = require("./semantic.json");
+const spectrum = require("./spectrum.json");
+const stardust = require("./stardust.json");
+const w3 = require("./w3.json");
+const web = require("./web.json");
 
 // Sources
-export const sources = [
+const sources = [
   antd,
   atlassian,
   auth0,
@@ -42,87 +42,91 @@ export const sources = [
 ].map((source) => ({
   ...source,
   components: source.components.map((component) => {
-    const componentOpenUIName = component.openUIName || component.name
+    const componentOpenUIName = component.openUIName || component.name;
     return {
       ...component,
       sourceName: source.name,
       openUIName: componentOpenUIName,
       concepts: _.map(component.concepts, (concept) => {
-        const conceptOpenUIName = concept.openUIName || concept.name
+        const conceptOpenUIName = concept.openUIName || concept.name;
         return {
           ...concept,
           sourceName: source.name,
           componentName: componentOpenUIName,
           openUIName: conceptOpenUIName,
-        }
+        };
       }),
-    }
+    };
   }),
-}))
+}));
 
-export const sourceNames = _.map(sources, 'name')
-export const sourcesCount = sources.length
-export const sourceComponentConceptMap = sources.reduce((acc, src) => {
-  acc[src.name] = {}
+module.exports = {
+  sources,
+};
 
-  _.forEach(src.components, (comp) => {
-    acc[src.name][comp.openUIName] = {}
+// export const sourceNames = _.map(sources, 'name')
+// export const sourcesCount = sources.length
+// export const sourceComponentConceptMap = sources.reduce((acc, src) => {
+//   acc[src.name] = {}
 
-    _.forEach(comp.concepts, (con) => {
-      acc[src.name][comp.openUIName][con.openUIName] = con
-    })
-  })
+//   _.forEach(src.components, (comp) => {
+//     acc[src.name][comp.openUIName] = {}
 
-  return acc
-}, {})
+//     _.forEach(comp.concepts, (con) => {
+//       acc[src.name][comp.openUIName][con.openUIName] = con
+//     })
+//   })
 
-// Components
-const componentList = _.flatMap(sources, 'components')
-export const componentOriginalNames = _.map(componentList, 'name')
-export const componentsByName = _.groupBy(componentList, 'openUIName')
+//   return acc
+// }, {})
 
-// Anatomies
-export const anatomiesByComponent = _.mapValues(componentsByName, (components) =>
-  _.compact(_.uniqBy(_.flatMap(components, 'anatomy'), 'name')),
-)
+// // Components
+// const componentList = _.flatMap(sources, 'components')
+// export const componentOriginalNames = _.map(componentList, 'name')
+// export const componentsByName = _.groupBy(componentList, 'openUIName')
 
-// Concepts
-const conceptList = _.compact(_.flatMap(componentList, 'concepts'))
+// // Anatomies
+// export const anatomiesByComponent = _.mapValues(componentsByName, (components) =>
+//   _.compact(_.uniqBy(_.flatMap(components, 'anatomy'), 'name')),
+// )
 
-export const openUIConceptsByComponent = _.mapValues(
-  _.groupBy(conceptList, 'componentName'),
-  (concepts) => _.groupBy(concepts, 'openUIName'),
-)
+// // Concepts
+// const conceptList = _.compact(_.flatMap(componentList, 'concepts'))
 
-export const conceptsByComponent = _.mapValues(
-  _.groupBy(conceptList, 'componentName'),
-  (concepts) => _.groupBy(concepts, 'name'),
-)
+// export const openUIConceptsByComponent = _.mapValues(
+//   _.groupBy(conceptList, 'componentName'),
+//   (concepts) => _.groupBy(concepts, 'openUIName'),
+// )
 
-export const getSourcesWithComponentConcept = (
-  componentName,
-  conceptName,
-  conceptOpenUIName = conceptName,
-) =>
-  _.uniq(
-    _.map(
-      _.get(conceptsByComponent, [componentName, conceptName]).filter(
-        (concept) => concept.name === conceptName && concept.openUIName === conceptOpenUIName,
-      ),
-      'sourceName',
-    ),
-  )
+// export const conceptsByComponent = _.mapValues(
+//   _.groupBy(conceptList, 'componentName'),
+//   (concepts) => _.groupBy(concepts, 'name'),
+// )
 
-// Images
-export const getImagesForComponentConcept = (componentOpenUIName, conceptOpenUIName) =>
-  _.compact(_.map(_.get(openUIConceptsByComponent, [componentOpenUIName, conceptOpenUIName])))
+// export const getSourcesWithComponentConcept = (
+//   componentName,
+//   conceptName,
+//   conceptOpenUIName = conceptName,
+// ) =>
+//   _.uniq(
+//     _.map(
+//       _.get(conceptsByComponent, [componentName, conceptName]).filter(
+//         (concept) => concept.name === conceptName && concept.openUIName === conceptOpenUIName,
+//       ),
+//       'sourceName',
+//     ),
+//   )
 
-// Images for component
-export const getImagesForComponent = (componentOpenUIName) => {
-  const images = []
-  const arr = _.map(_.get(openUIConceptsByComponent, componentOpenUIName), (val) =>
-    _.map(val, (v) => v.image),
-  )
-  arr.forEach((a) => a.forEach((i) => images.push(i)))
-  return images
-}
+// // Images
+// export const getImagesForComponentConcept = (componentOpenUIName, conceptOpenUIName) =>
+//   _.compact(_.map(_.get(openUIConceptsByComponent, [componentOpenUIName, conceptOpenUIName])))
+
+// // Images for component
+// export const getImagesForComponent = (componentOpenUIName) => {
+//   const images = []
+//   const arr = _.map(_.get(openUIConceptsByComponent, componentOpenUIName), (val) =>
+//     _.map(val, (v) => v.image),
+//   )
+//   arr.forEach((a) => a.forEach((i) => images.push(i)))
+//   return images
+// }
