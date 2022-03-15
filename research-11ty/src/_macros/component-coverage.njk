@@ -1,0 +1,24 @@
+{% macro linkToSource(component) %}
+  <span>
+    <a target="_blank" rel="noopener noreferrer" href="{{ component.url }}">
+      {{ component.sourceName }}
+    </a>
+  </span>
+{% endmacro %}
+{% macro componentCoverage(components) %}
+  <div>
+    <h2>Names</h2>
+    <ul>
+      {% for component in components %}
+        <li>
+          {{ component.name }} -
+          <small>
+            {% for matchingComponent in component.matchingComponents %}
+              {{ linkToSource(matchingComponent) }}
+            {% endfor %}
+          </small>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}

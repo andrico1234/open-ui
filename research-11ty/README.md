@@ -4,7 +4,7 @@ This is a proof-of-concept to understand the complexities with moving away from 
 
 ## Why do we want to do migrate away from React/Gatsby?
 
-The Open UI site is a data-driven static site.
+For the most part, the Open UI site is a data-driven and static site.
 
 For almost every page, we render static content using MDX or JSON data, yet we're requiring contributors to understand React and Gatsby to easily make changes to the Open UI site.
 
@@ -14,11 +14,11 @@ While Gatsby's purpose is to develop blazing-fast static site app, it requires k
 - GraphQL
 - Gatsby's own build system (gatsby-browser, gatsby-config, gatsby-node)
 
-Which adds a huge level of friction for those who want to contribute to Open UI. This isn't conducive for a community where anyone can easily contribute, and not just React developers.
+This adds a huge level of friction for those who want to contribute to Open UI. This isn't conducive for a community where anyone can easily contribute, not just React developers.
 
 Instead, we want to reduce as much friction for people to contribute to the repo, by bringing the tech stack down to the lowest level needed. Ideally, down to little more than HTML, CSS, and JavaScript
 
-> Also, on several occassions, various members of the Open UI community have had problems with installingh Gatsby, due to the notoriously fickle `Sharp` module.
+> Also, on several occassions, various members of the Open UI community have had problems with installing Gatsby, due to the notoriously fickle `Sharp` module.
 > (link to different Discord issues).
 
 The results of such a migration will ensure that the Open UI site is:
@@ -27,7 +27,53 @@ The results of such a migration will ensure that the Open UI site is:
 - Easier to maintain
 - Future proof (React knowledge no-longer required, just some HTML, CSS, and a little JavaScript)
 
-## Why 11ty?
+## Option 1: 11ty
+
+I've begun exploring [11ty](https://www.11ty.dev/docs/), which gives us flexibility in how we write our HTML templates and define our data. There are a handful
+
+### Settle on a templating engine
+
+11ty lets us choose from a handful of templating engines out of the box, such as Markdown, Nunjucks, EJS, and vanilla JS.
+
+MDX is notably omitted, which is the template language we use for the majority of our static content in the existing site. We could look to use an MDX plugin for 11ty, but there look to be [significant tradeoffs](https://twitter.com/mikeriethmuller/status/1295289371000619008) with doing so.
+
+### Prove migrating styles
+
+In the current site, Open UI uses several methods for managing styles:
+
+- inline styles
+- styles in `.css` files
+- defining a styles via `Typography.js`
+
+Components like the `Header` component have their own inline styles
+
+There are also a handful of additional `*.css` files:
+
+`global.css`, `table-anatomy.css`, `spec.css`, and `anatomy.css`.
+
+Gatsby uses the `Typography.js` plugin to generate our styles at build-time and is then served as a static `.css` file.
+
+#### Migrating styles
+
+Using a standard `.css` solution may be simple enough for a such a site. To simplify the migration of the `typography.js` styles, we can leverage its `toString()` API which allows us to write out a `css` file at build time.
+
+Typography offers an API that lets us convert the design object to a CSS output. We can invoke this function when our build starts to automatically generate our css file. Eleventy then handles the rest.
+
+### Prove migration of interactive elements
+
+Instead of using React to manage complex UI, we can leverage web components instead.
+
+One example of how to do this can be found [here](https://griffa.dev/posts/using-web-components-with-11ty/), but will add complexity to our build tooling.
+
+Template engines like Nunjucks will allow us to reuse layouts, via frontmatters `layout` key, while we can use macros to reuse component logic.
+
+While I'm still in the exploration phase with Nunjucks, the approach of using macros to reuse components doesn't feel as intuitive as writing JSZ, and passing through props. If this issue persists, it goes against one of the principles of this rewrite, to make the repo easier to contribute to.
+
+Other possible avenues could be to:
+
+- simplify some of our more complex components, such as the [concepts](https://open-ui.org/components/breadcrumb.research) collapsible.
+- leverage an MDX plugin, and pay for the tradeoffs
+- use web components (lit?) for more complex components.
 
 ## Estimated time
 
@@ -39,7 +85,7 @@ The results of such a migration will ensure that the Open UI site is:
 - [ ] Settle on a template engine (Nunjucks, Lit?)
 - [x] Prove migrating styles
 - [ ] Prove converting MDX to 11ty
-- [ ] Prove serviing images
+- [ ] Prove serving images
 - [ ] Prove site navigation
 - [ ] Prove migration of interactive elements (web components?)
 
@@ -66,29 +112,7 @@ The results of such a migration will ensure that the Open UI site is:
 
 ## Proof of concept
 
-### Installing Elventy
-
-### Settle on a templating engine
-
-### Prove migrating styles
-
-Styles are defined using the Typography plugin, which Gatsby uses to generate the CSS in the head? of the site.
-
-`global.css`, `table-anatomy.css`, `spec.css`, and `anatomy.css`.
-
-Components like the `Header` component have their own inline styles
-
-#### Migrating Typography styles
-
-Typography offers an API that lets us convert the design object to a CSS output. We can invoke this function when our build starts to automatically generate our css file. Eleventy then handles the rest.
-
-### Prove migration of interactive elements
-
-Instead of using React to manage complex UI, we can leverage web components to do so.
-
-One example of how to do this can be found [here](https://griffa.dev/posts/using-web-components-with-11ty/), but will add complexity to our build tooling
-
-(or can we use a template engine to manage this instead?)
+### Installing Eleventy
 
 #### Option 1
 
