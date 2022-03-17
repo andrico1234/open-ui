@@ -37,6 +37,8 @@ I've begun exploring [11ty](https://www.11ty.dev/docs/), which gives us flexibil
 
 MDX is notably omitted, which is the template language we use for the majority of our static content in the existing site. We could look to use an MDX plugin for 11ty, but there look to be [significant tradeoffs](https://twitter.com/mikeriethmuller/status/1295289371000619008) with doing so.
 
+One option is to use [MDJS](https://rocket.modern-web.dev/docs/eleventy-plugins/mdjs-unified/) along with Lit to offer a similar to DX to MDX and React.
+
 ### Prove migrating styles
 
 In the current site, Open UI uses several methods for managing styles:
