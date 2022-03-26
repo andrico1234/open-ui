@@ -1,7 +1,5 @@
 import { html, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
 
-@customElement("component-coverage")
 class ComponentCoverage extends LitElement {
   render() {
     return html`
@@ -35,3 +33,5 @@ class ComponentCoverage extends LitElement {
     `;
   }
 }
+
+customElements.define("component-coverage", ComponentCoverage);

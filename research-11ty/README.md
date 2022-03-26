@@ -77,6 +77,10 @@ Other possible avenues could be to:
 - leverage an MDX plugin, and pay for the tradeoffs
 - use web components (lit?) for more complex components.
 
+#### Additional notes
+
+Lit have an experimental [Eleventy plugin](https://lit.dev/blog/2022-02-07-eleventy/)
+
 ## Estimated time
 
 ## Todo
@@ -114,7 +118,15 @@ Other possible avenues could be to:
 
 ## Proof of concept
 
-### Installing Eleventy
+### Eleventy
+
+What is Eleventy?
+
+Why is different?
+
+Can it solve the things we want it to?
+
+If we choose to use Eleventy, how will we migrate our site?
 
 #### Option 1
 
@@ -127,6 +139,10 @@ Great when:
 - the site has a small number of interactive element
 - the interactive elements are simple, and require little/no state management
 - we want to keep the build system simple
+
+Problems with:
+
+-
 
 #### Option 2
 
@@ -146,7 +162,12 @@ Less desireable because:
 
 Extend the build pipeline of the app to add Lit support, which will help make building web components much easier
 Less desireable
+### Rocket
 
-#### Option 4
+- A batteries-included static site generator
+- Not tied to a specific framework
+- Built-in support for web components and `mdjs`, which makes it easier to use web components for more complicated UI logic
+- Something I struggled to get up and working with Eleventy easily
 
-- Add your own
+### Astro
+

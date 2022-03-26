@@ -4,17 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "eleventy --serve",
+    "start:wds": "concurrently \"eleventy --serve\" \"web-dev-server  --node-resolve\"",
+    "start": "eleventy --serve --config=.eleventy.cjs",
+    "start:debug": "DEBUG=Eleventy* eleventy --serve",
     "build": "eleventy"
   },
   "keywords": [],
   "author": "Andrico Karoulla",
+  "type": "module",
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@web/dev-server": "^0.1.30",
+    "concurrently": "^7.0.0",
     "typography": "^0.16.21"
   },
   "dependencies": {
+    "@lit-labs/eleventy-plugin-lit": "^0.2.0",
     "lit": "^2.2.1"
   }
 }
