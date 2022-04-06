@@ -81,6 +81,15 @@ Other possible avenues could be to:
 
 Lit have an experimental [Eleventy plugin](https://lit.dev/blog/2022-02-07-eleventy/)
 
+## Option 2: Rocket
+
+Rocket is a static site builder that aims to be like Next/Nest but without the need to work with a JavaScript framework. Instead, Rocket focuses on working more closely with the web standards. [This tweet](https://twitter.com/daKmoR/status/1506601983293235209) makes for a great introduction to what Rocket is about.
+
+The two main reasons why I'd like to evaluate Rocket, and possibly choose it over 11ty.
+
+1. The `mdjs` format, which allows us to write JavaScript within a markdown file without requiring the overhead of an `mdx` plugin.
+2. `Lit` works out of the box, and is the default templating engine. The way of writing Lit components feels close to writing HTML + custom elements, whereas engines like Nunjucks have their own syntax, rules, and limitatinos.
+
 ## Estimated time
 
 ## Todo
@@ -162,6 +171,7 @@ Less desireable because:
 
 Extend the build pipeline of the app to add Lit support, which will help make building web components much easier
 Less desireable
+
 ### Rocket
 
 - A batteries-included static site generator
@@ -170,4 +180,3 @@ Less desireable
 - Something I struggled to get up and working with Eleventy easily
 
 ### Astro
-
